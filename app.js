@@ -367,7 +367,7 @@ featureFlags.enableSmartRetry = false;
 
 // 练习：修改 true/false 后撤销，再 Ctrl-r 重做。`,
     tags: ["u", "Ctrl-r"],
-    check: state => state.changed && hasKey(state, ["u"]) && hasKey(state, ["Ctrl-r", "Ctrl-R"])
+    check: state => state.changed && hasKey(state, ["u"]) && hasKey(state, ["<C-r>", "<C-R>"])
   },
   {
     level: "进阶",
