@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vim Trainer</title>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material-darker.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/dialog/dialog.min.css">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <aside class="side-panel" aria-label="训练课程">
+      <div class="brand-row">
+        <div>
+          <p class="eyebrow">Vim Trainer</p>
+          <h1>模式练习台</h1>
+        </div>
+        <button class="icon-button" id="resetBtn" title="重置当前关卡" aria-label="重置当前关卡">
+          <i data-lucide="rotate-ccw"></i>
+        </button>
+      </div>
+
+      <section class="progress-box" aria-label="训练进度">
+        <div class="progress-line">
+          <span>当前关卡</span>
+          <strong id="lessonCounter">1 / 12</strong>
+        </div>
+        <div class="progress-track"><div id="progressBar"></div></div>
+      </section>
+
+      <nav class="lesson-list" id="lessonList" aria-label="关卡列表"></nav>
+    </aside>
+
+    <section class="workbench">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Practice Buffer</p>
+          <h2 id="lessonTitle">基础移动</h2>
+        </div>
+        <div class="mode-pill" id="modePill">NORMAL</div>
+      </header>
+
+      <section class="task-strip" aria-label="当前任务">
+        <div>
+          <p class="task-label">目标</p>
+          <p id="lessonGoal">使用 h j k l 移动光标。</p>
+        </div>
+        <button class="primary-button" id="nextBtn">
+          <i data-lucide="arrow-right"></i>
+          下一关
+        </button>
+      </section>
+
+      <section class="lesson-guide" aria-label="关卡说明">
+        <article>
+          <p class="task-label">用法讲解</p>
+          <p id="lessonIntro">Vim 的基础移动来自普通模式。先把光标移动练熟，再进入编辑。</p>
+        </article>
+        <article>
+          <p class="task-label">操作步骤</p>
+          <ol id="lessonSteps"></ol>
+        </article>
+      </section>
+
+      <section class="completion-box" aria-label="完成条件">
+        <p class="task-label">完成条件</p>
+        <p id="lessonCheck">按提示完成当前动作即可自动判定。</p>
+      </section>
+
+      <div class="editor-frame">
+        <textarea id="editor"></textarea>
+      </div>
+
+      <footer class="statusbar">
+        <div class="status-left">
+          <span id="positionLabel">Ln 1, Col 1</span>
+          <span id="lastKeyLabel">Key: -</span>
+        </div>
+        <div class="status-right" id="feedbackLabel">进入编辑区后直接按 Vim 键位练习。</div>
+      </footer>
+    </section>
+
+    <aside class="reference-panel" aria-label="速查表">
+      <div class="ref-header">
+        <p class="eyebrow">Cheatsheet</p>
+        <h2>速查</h2>
+      </div>
+      <div class="ref-grid" id="referenceGrid"></div>
+      <div class="command-box">
+        <p class="task-label">Ex 命令</p>
+        <p>在编辑区按 <kbd>:</kbd> 后可练习 <code>:w</code>、<code>:q</code>、<code>:%s/a/b/g</code> 等常见命令。这里不会写入磁盘，<code>:w</code> 会显示保存反馈。</p>
+      </div>
+    </aside>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/dialog/dialog.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/search/searchcursor.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/keymap/vim.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

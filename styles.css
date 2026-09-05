@@ -1,0 +1,513 @@
+:root {
+  color-scheme: dark;
+  --bg: #101317;
+  --panel: #171c22;
+  --panel-2: #1f252c;
+  --line: #303842;
+  --text: #edf2f7;
+  --muted: #98a6b5;
+  --accent: #51b6a5;
+  --accent-2: #f2bc57;
+  --danger: #ff7373;
+  --shadow: 0 16px 45px rgba(0, 0, 0, .28);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+}
+
+button,
+textarea,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.app-shell {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(240px, 300px) minmax(420px, 1fr) minmax(260px, 340px);
+  gap: 1px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.side-panel,
+.reference-panel,
+.workbench {
+  background: var(--panel);
+}
+
+.side-panel,
+.reference-panel {
+  padding: 22px;
+  height: 100vh;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.workbench {
+  min-width: 0;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto auto auto auto minmax(360px, 1fr) auto;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.brand-row,
+.topbar,
+.ref-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.eyebrow,
+.task-label {
+  margin: 0 0 6px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+h1,
+h2 {
+  margin: 0;
+  line-height: 1.08;
+}
+
+h1 {
+  font-size: 28px;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+.icon-button,
+.primary-button {
+  border: 1px solid var(--line);
+  background: var(--panel-2);
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  border-radius: 8px;
+}
+
+.icon-button {
+  width: 40px;
+  flex: 0 0 40px;
+}
+
+.icon-button svg,
+.primary-button svg {
+  width: 18px;
+  height: 18px;
+}
+
+.primary-button {
+  padding: 0 14px;
+  background: var(--accent);
+  color: #07110f;
+  border-color: transparent;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.progress-box {
+  margin: 26px 0 18px;
+  padding: 14px;
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.progress-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.progress-line strong {
+  color: var(--text);
+}
+
+.progress-track {
+  height: 8px;
+  margin-top: 12px;
+  background: #0c0f12;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-track div {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transition: width .25s ease;
+}
+
+.lesson-list {
+  display: grid;
+  gap: 8px;
+}
+
+.lesson-item {
+  width: 100%;
+  min-height: 58px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text);
+  text-align: left;
+  padding: 10px 12px;
+}
+
+.lesson-item strong,
+.lesson-item span {
+  display: block;
+}
+
+.lesson-item strong {
+  font-size: 14px;
+}
+
+.lesson-item span {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.lesson-item.active {
+  border-color: var(--accent);
+  background: rgba(81, 182, 165, .11);
+}
+
+.lesson-item.done strong::after {
+  content: " done";
+  margin-left: 8px;
+  color: var(--accent-2);
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.topbar,
+.task-strip,
+.statusbar,
+.lesson-guide,
+.completion-box {
+  padding: 18px 22px;
+}
+
+.topbar {
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+}
+
+.mode-pill {
+  min-width: 94px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  background: #0b0e11;
+  border: 1px solid var(--line);
+  color: var(--accent-2);
+  font-weight: 900;
+  text-align: center;
+}
+
+.task-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  border-bottom: 1px solid var(--line);
+  background: #131820;
+}
+
+.task-strip p:last-child {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.lesson-guide {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr);
+  gap: 16px;
+  background: #151a20;
+  border-bottom: 1px solid var(--line);
+}
+
+.lesson-guide article,
+.completion-box {
+  min-width: 0;
+}
+
+.lesson-guide p:last-child,
+.completion-box p:last-child {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.58;
+  font-size: 14px;
+}
+
+.lesson-guide ol {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.lesson-guide li + li {
+  margin-top: 4px;
+}
+
+.completion-box {
+  background: #10151b;
+  border-bottom: 1px solid var(--line);
+}
+
+.editor-frame {
+  min-height: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.CodeMirror {
+  height: 100%;
+  min-height: 420px;
+  font-family: "Cascadia Code", "JetBrains Mono", Consolas, monospace;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.CodeMirror-cursor {
+  border-left: 2px solid var(--accent-2);
+}
+
+.CodeMirror-dialog {
+  background: #0d1014;
+  border-top: 1px solid var(--line);
+  color: var(--text);
+  font-family: "Cascadia Code", Consolas, monospace;
+  padding: 8px 10px;
+}
+
+.CodeMirror-dialog input {
+  width: calc(100% - 30px);
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--accent-2);
+  font-family: inherit;
+}
+
+.CodeMirror.search-muted .CodeMirror-searching {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: inherit !important;
+  outline: 0 !important;
+}
+
+.CodeMirror.search-muted .cm-searching {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: inherit !important;
+  outline: 0 !important;
+}
+
+.statusbar {
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-top: 1px solid var(--line);
+  background: #0d1014;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.status-left,
+.status-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.status-right {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.ref-grid {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.ref-card,
+.command-box {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel-2);
+  padding: 14px;
+}
+
+.ref-card h3 {
+  margin: 0 0 10px;
+  font-size: 15px;
+}
+
+.ref-card dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 7px 10px;
+  align-items: baseline;
+}
+
+.ref-card dt,
+kbd,
+code {
+  font-family: "Cascadia Code", Consolas, monospace;
+}
+
+.ref-card dt,
+kbd {
+  color: #101317;
+  background: var(--accent-2);
+  border-radius: 5px;
+  padding: 2px 6px;
+  font-weight: 800;
+}
+
+.ref-card dd {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.command-box {
+  margin-top: 16px;
+  color: var(--muted);
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.command-box p:last-child {
+  margin-bottom: 0;
+}
+
+code {
+  color: var(--accent-2);
+}
+
+.side-panel::-webkit-scrollbar,
+.reference-panel::-webkit-scrollbar,
+.workbench::-webkit-scrollbar {
+  width: 10px;
+}
+
+.side-panel::-webkit-scrollbar-thumb,
+.reference-panel::-webkit-scrollbar-thumb,
+.workbench::-webkit-scrollbar-thumb {
+  background: #3a444f;
+  border: 2px solid var(--panel);
+  border-radius: 999px;
+}
+
+.side-panel::-webkit-scrollbar-track,
+.reference-panel::-webkit-scrollbar-track,
+.workbench::-webkit-scrollbar-track {
+  background: #11161b;
+}
+
+@media (max-width: 1080px) {
+  .app-shell {
+    grid-template-columns: 260px minmax(0, 1fr);
+  }
+
+  .reference-panel {
+    grid-column: 1 / -1;
+    display: block;
+    height: 34vh;
+  }
+
+  .ref-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  body {
+    overflow: auto;
+  }
+
+  .app-shell {
+    display: block;
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
+
+  .side-panel,
+  .reference-panel {
+    height: auto;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .workbench {
+    height: auto;
+    overflow: visible;
+  }
+
+  .task-strip,
+  .statusbar,
+  .topbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .status-right {
+    text-align: left;
+    justify-content: flex-start;
+  }
+
+  .CodeMirror {
+    min-height: 58vh;
+    font-size: 14px;
+  }
+
+  .ref-grid {
+    grid-template-columns: 1fr;
+  }
+}
